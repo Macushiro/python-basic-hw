@@ -27,7 +27,7 @@ def is_prime(num):
     else:
         return False
     '''
-    if num == 0 or num == 1:
+    if num < 2:
         return False
     else:
         a = True
