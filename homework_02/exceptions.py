@@ -5,12 +5,15 @@
 - CargoOverload
 """
 class LowFuelError(Exception):
-    print("Not enough fuel to start car.")
+    def __init__(self, message="Not enough fuel to start car."):
+        super().__init__(message)
 
 
 class NotEnoughFuel(Exception):
-    print("Not enough fuel to reach finish point of route.")
+    def __init__(self, message="Not enough fuel to reach finish point of route."):
+        super().__init__(message)
 
 
 class CargoOverload(Exception):
-    print("The vehicle is overload, we cannot move.")
+    def __init__(self, message="The vehicle is overload, we cannot move."):
+        super().__init__(message)
