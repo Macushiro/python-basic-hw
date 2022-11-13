@@ -23,7 +23,7 @@ def main_response() -> JSONResponse:
 
 @router.get('/get_current_dts')
 def get_current_time() -> JSONResponse:
-    now = datetime.now()
+    now = datetime.now().astimezone()
     return JSONResponse(
         {
             "Current date is": now.strftime('%Y-%m-%d'),
