@@ -30,9 +30,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
 )
 
-# PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
-DB_URL = "postgresql+pg8000://username:passwd!@localhost/blog"
-DB_ASYNC_URL = "postgresql+asyncpg://username:passwd!@localhost/blog"
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
 
 class Base:
@@ -43,8 +41,8 @@ class Base:
     id = Column(Integer, primary_key=True)
 
 
-engine: AsyncEngine = create_async_engine(url=DB_ASYNC_URL, echo=False)
-sync_engine = create_engine(url=DB_URL, echo=False)
+engine: AsyncEngine = create_async_engine(url=PG_CONN_URI, echo=False)
+sync_engine = create_engine(url=PG_CONN_URI, echo=False)
 Base = declarative_base(bind=sync_engine, cls=Base)
 
 Session = sessionmaker(
@@ -55,11 +53,11 @@ Session = sessionmaker(
 
 
 class User(Base):
-    name = Column(String(30), nullable=False, default="")
-    username = Column(String(100), nullable=False, default="")
+    name = Column(String(50), nullable=False, default="")
+    username = Column(String(150), nullable=False, default="")
     email = Column(String(150), nullable=False, default="")
 
-    posts = relationship("Post", back_populates="users", uselist=True)
+    posts = relationship("Post", back_populates="user", uselist=True)
 
 
 class Post(Base):
@@ -68,10 +66,3 @@ class Post(Base):
     body = Column(Text, nullable=False, default="")
 
     user = relationship("User", back_populates="posts", uselist=False)
-
-
-def main():
-    Base.metadata.create_all()
-
-if __name__ == '__main__':
-    main()
