@@ -13,14 +13,43 @@
 - закрытие соединения с БД
 """
 
+import asyncio
+
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from models import Base, Session, engine
+
+
+async def create_tables():
+    print("Recreating tables has started")
+    async with engine.begin() as db_connect:
+        print("Begin")
+        await db_connect.run_sync(Base.metadata.drop_all)
+        await db_connect.run_sync(Base.metadata.create_all)
+    print("Recreating tables has finished")
+
+
+async def create_user(session:AsyncSession, name: str):
+    print(f"User {name} has created")
+
+
+async def create_post(session:AsyncSession, title: str):
+    print(f"Post with title {title} has created")
+
 
 async def async_main():
-    pass
+    await create_tables()
+
+    async with Session() as session:
+        await asyncio.gather(
+            create_user(session=session, name="Bob"),
+            create_post(session=session, title="Bob's days")
+        )
 
 
-def main():
-    pass
+async def main():
+    await async_main()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
