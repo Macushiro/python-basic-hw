@@ -11,6 +11,7 @@
 import os
 
 from sqlalchemy import (
+    create_engine,
     Column,
     Integer,
     String,
@@ -29,7 +30,9 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
 )
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+# PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+DB_URL = "postgresql+pg8000://username:passwd!@localhost/blog"
+DB_ASYNC_URL = "postgresql+asyncpg://username:passwd!@localhost/blog"
 
 
 class Base:
@@ -40,8 +43,9 @@ class Base:
     id = Column(Integer, primary_key=True)
 
 
-engine: AsyncEngine = create_async_engine(url=PG_CONN_URI, echo=False)
-Base = declarative_base(bind=engine, cls=Base)
+engine: AsyncEngine = create_async_engine(url=DB_ASYNC_URL, echo=False)
+sync_engine = create_engine(url=DB_URL, echo=False)
+Base = declarative_base(bind=sync_engine, cls=Base)
 
 Session = sessionmaker(
     engine,
@@ -64,3 +68,10 @@ class Post(Base):
     body = Column(Text, nullable=False, default="")
 
     user = relationship("User", back_populates="posts", uselist=False)
+
+
+def main():
+    Base.metadata.create_all()
+
+if __name__ == '__main__':
+    main()
