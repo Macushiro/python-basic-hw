@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+    User list
+{% endblock %}
+{% block body %}
+    <div class="h2 my-2">Users:</div>
+    {% if user_list %}
+        <ul class="list-group">
+            {% for user in user_list %}
+                <li class="product-list-item list-group-item">
+                    <span>{{ user.first_name + " " + user.last_name }}</span>
+                    <a class="text-decoration-none"
+                       href="{{ url_for('bills_app.bill_list', user_id=user.id) }}"
+                    >{{ user.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2>No users yet</h2>
+    {% endif %}
+{% endblock %}
