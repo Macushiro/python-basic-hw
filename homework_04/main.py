@@ -14,6 +14,7 @@
 """
 
 import asyncio
+import logging
 from typing import List
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -31,12 +32,19 @@ from jsonplaceholder_requests import (
     USERS_DATA_URL,
 )
 
+logging.basicConfig(format='%(asctime)s.%(msecs)03d %(message)s',
+                    level=logging.DEBUG,
+                    datefmt='%Y-%m-%d %H:%M:%S')
+logging.getLogger('asyncio').setLevel(logging.WARNING)
+logger = logging.getLogger(__name__)
+
+
 async def recreate_tables():
-    print("Recreating tables has started")
+    logger.info("Recreating tables has started")
     async with engine.begin() as db_connect:
         await db_connect.run_sync(Base.metadata.drop_all)
         await db_connect.run_sync(Base.metadata.create_all)
-    print("Recreating tables has finished")
+    logger.info("Recreating tables has finished")
 
 
 async def fetch_users_data(url: str) -> list[dict]:
@@ -50,21 +58,20 @@ async def fetch_post_data(url: str) -> list[dict]:
 
 
 async def create_users(session:AsyncSession, user_data: list[dict]) -> list[User]:
-    print("Start creating users")
+    logger.info("Start creating users")
     users = [
         User(username=el["username"], name=el["name"], email=el["email"])
         for el in user_data
     ]
     session.add_all(users)
-    print(users)
 
     await session.commit()
-    print("Finish creating users")
+    logger.info("Finish creating users")
     return users
 
 
 async def create_posts(session:AsyncSession, posts_data: list[dict]) -> list[Post]:
-    print("Start creating posts")
+    logger.info("Start creating posts")
     posts = [
         Post(user_id=el["userId"], title=el["title"], body=el["body"])
         for el in posts_data
@@ -72,7 +79,7 @@ async def create_posts(session:AsyncSession, posts_data: list[dict]) -> list[Pos
     session.add_all(posts)
 
     await session.commit()
-    print("Finish creating posts")
+    logger.info("Finish creating posts")
     return posts
 
 

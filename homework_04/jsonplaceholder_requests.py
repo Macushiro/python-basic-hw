@@ -16,9 +16,6 @@ async def fetch_json(url: str) -> list[dict]:
     async with aiohttp.ClientSession() as session:
         response = await session.get(url)
         data = await response.json()
-        # print(data)
-        # for el in data:
-        #     print(el["name"])
         return data
 
 
