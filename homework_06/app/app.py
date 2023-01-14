@@ -9,7 +9,7 @@ from models import db
 app = Flask(
     __name__,
 )
-app.register_blueprint(users_app, url_prefix="/users")
+app.register_blueprint(users_app, url_prefix="/user")
 app.register_blueprint(bills_app, url_prefix="/bills")
 
 CONFIG_OBJECT = getenv("CONFIG", "DevelopmentConfig")

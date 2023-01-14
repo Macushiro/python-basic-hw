@@ -3,5 +3,8 @@
     Main page
 {% endblock %}
 {% block body %}
-    <h1>Main info</h1>
+    <div class="h2">Main info</div>
+    <a class="text-decoration-none"
+        href="{{ url_for('users_app.user_list') }}"
+    >Go to user list</a>
 {% endblock %}

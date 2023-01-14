@@ -7,15 +7,18 @@
     {% if user_list %}
         <ul class="list-group">
             {% for user in user_list %}
-                <li class="product-list-item list-group-item">
-                    <span>{{ user.first_name + " " + user.last_name }}</span>
+                <li class="list-group-item">
+                    <span>User</span>
                     <a class="text-decoration-none"
-                       href="{{ url_for('bills_app.bill_list', user_id=user.id) }}"
-                    >{{ user.name }}</a>
+                       href="{{ url_for('users_app.user_info', user_id=user.id) }}"
+                    >{{ user.first_name + " " + user.last_name }}</a>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
         <h2>No users yet</h2>
     {% endif %}
+    <a class="text-decoration-none"
+        href="{{ url_for('index_page') }}"
+    >Back to main page</a>
 {% endblock %}
