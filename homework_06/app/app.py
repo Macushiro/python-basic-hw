@@ -24,6 +24,7 @@ db.init_app(app)
 
 @app.cli.command("db-create-all")
 def db_create_all():
+    db.drop_all()
     db.create_all()
     # print(db.metadata.tables)
 

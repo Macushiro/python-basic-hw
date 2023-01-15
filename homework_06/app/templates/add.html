@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
     <div>
-        <div class="h3">Add a new bill for user {{ user.first_name }}</div>
+        <div class="h3">Add a new bill for user {{ user.name }}</div>
 
         <form method="post">
             {{ form.hidden_tag() }}

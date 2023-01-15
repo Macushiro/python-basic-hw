@@ -11,7 +11,7 @@
                     <span>User</span>
                     <a class="text-decoration-none"
                        href="{{ url_for('users_app.user_info', user_id=user.id) }}"
-                    >{{ user.first_name + " " + user.last_name }}</a>
+                    >{{ user.name + " " + user.email }}</a>
                 </li>
             {% endfor %}
         </ul>

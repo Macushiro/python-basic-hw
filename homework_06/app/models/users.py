@@ -23,10 +23,9 @@ if TYPE_CHECKING:
 
 class User(db.Model):
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(100), nullable=False, default="", server_default="")
-    last_name = Column(String(200), nullable=False, default="", server_default="")
-    age = Column(Integer, nullable=False)
-    bio = Column(Text, nullable=True)
+    name = Column(String(100), nullable=False, default="", server_default="")
+    email = Column(String(200), nullable=False, default="", server_default="")
+    # age = Column(Integer, nullable=False, default=1, server_default=1)
 
     bills = relationship("Bill", back_populates="user", uselist=False)
 

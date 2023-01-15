@@ -3,7 +3,7 @@
     User {{ user.name }} bills
 {% endblock %}
 {% block body %}
-    <div class="h2 my-2">Bills for {{ user.first_name }}:</div>
+    <div class="h2 my-2">Bills for {{ user.name }}:</div>
     {% if bills_list %}
         <table class="table table-light table-striped-columns">
             <thead class="table-warning">
