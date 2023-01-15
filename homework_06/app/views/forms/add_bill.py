@@ -1,3 +1,7 @@
+"""
+    Форма добавления нового счёта.
+"""
+
 from flask_wtf import FlaskForm
 from wtforms import (
     IntegerField,

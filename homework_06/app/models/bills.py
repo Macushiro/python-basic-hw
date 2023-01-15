@@ -7,7 +7,7 @@
 
 from typing import TYPE_CHECKING
 from sqlalchemy.orm import relationship
-from pydantic import confloat
+
 from sqlalchemy import (
     Column,
     Integer,

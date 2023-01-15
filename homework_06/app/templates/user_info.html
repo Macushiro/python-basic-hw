@@ -15,16 +15,16 @@
             </thead>
             <tbody class="table-group-divider">
             {% for bill in bills_list %}
-            <tr>
-                <th scope="row">{{ bill.bill_number }}</th>
-                <td>{{ bill.total }}</td>
-                <td>{{ bill.description }}</td>
-            </tr>
+                <tr>
+                    <th scope="row">{{ bill.bill_number }}</th>
+                    <td>{{ bill.total }}</td>
+                    <td>{{ bill.description }}</td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <h2>No users yet</h2>
+        <h2>No bills yet</h2>
     {% endif %}
     <button type="button"
             class="btn btn-outline-info my-3"

@@ -1,3 +1,7 @@
+"""
+    Модуль обработки запросов по счетам.
+"""
+
 from flask import (
     Blueprint,
     render_template,
@@ -43,7 +47,6 @@ def add_bill_for_user(user_id: int):
     bill_number = form.number.data
     bill_total = form.total.data
     bill_description = form.description.data
-    print(bill_number, bill_total, bill_description, user.first_name, user_id)
     bill = Bill(bill_number=bill_number, total=bill_total, description=bill_description, user_id=user_id)
     db.session.add(bill)
     try:

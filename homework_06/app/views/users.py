@@ -1,10 +1,6 @@
 from flask import (
     Blueprint,
     render_template,
-    request,
-    url_for,
-    redirect,
-    flash,
 )
 
 # Тут не пойму что сломалось. Приложение видит, но PyCharm подчеркнул красным,
@@ -21,7 +17,6 @@ users_app = Blueprint(
 @users_app.get("/list/", endpoint="user_list")
 def get_user_list():
     user_list = User.query.all()
-    print(user_list)
     return render_template("user_list.html", user_list=user_list)
 
 

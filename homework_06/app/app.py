@@ -1,3 +1,7 @@
+"""
+    Файл основной программы.
+"""
+
 from os import getenv
 
 from flask import Flask, render_template
