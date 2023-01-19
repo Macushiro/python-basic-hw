@@ -8,11 +8,11 @@ from flask import (
     request,
     url_for,
     redirect,
-    flash,
 )
 
-# Тут не пойму что сломалось. Приложение видит, но PyCharm подчеркнул красным,
-# а при импорте через "..models" - не подчеркивает, но зато выдаёт:
+# Тут не пойму что было с PyCharm, он подчеркнул красным "models",
+# и не видел обращения к методам и свойствам импортированных объектов,
+# а при импорте через "..models" - не подчеркивал, но зато выдавал:
 # "ImportError: attempted relative import beyond top-level package"
 from models import User, Bill, db
 from sqlalchemy.exc import IntegrityError
@@ -25,6 +25,8 @@ bills_app = Blueprint(
     __name__,
 )
 
+
+# Add new bill manually
 @bills_app.route(
     "/<int:user_id>/add_bill/",
     methods=["GET", "POST"],
@@ -56,6 +58,5 @@ def add_bill_for_user(user_id: int):
         raise BadRequest(f"Could not add bill with #{bill_number!r},"
                          f" bill with that number already exists.")
 
-    flash(f"Successfully added new bill {bill_number} for user {user.name}!")
     url = url_for("users_app.user_info", user_id=user_id)
     return redirect(url)

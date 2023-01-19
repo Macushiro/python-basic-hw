@@ -77,7 +77,6 @@ target/
 .venv/
 venv/
 
-.Version_0
 
 # PyCharm
 .idea

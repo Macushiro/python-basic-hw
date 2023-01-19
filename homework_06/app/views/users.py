@@ -6,11 +6,14 @@ import random
 from flask import (
     Blueprint,
     render_template,
+    url_for,
+    redirect,
 )
 from sqlalchemy import func
 
-# Тут не пойму что сломалось. Приложение видит, но PyCharm подчеркнул красным,
-# а при импорте через "..models" - не подчеркивает, но зато выдаёт:
+# Тут не пойму что было с PyCharm, он подчеркнул красным "models",
+# и не видел обращения к методам и свойствам импортированных объектов,
+# а при импорте через "..models" - не подчеркивал, но зато выдавал:
 # "ImportError: attempted relative import beyond top-level package"
 from models import db, User, Bill
 from sqlalchemy.exc import IntegrityError
@@ -24,12 +27,14 @@ users_app = Blueprint(
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
 
 
+# Get list of users
 @users_app.get("/list/", endpoint="user_list")
 def get_user_list():
     user_list = User.query.all()
     return render_template("user_list.html", user_list=user_list)
 
 
+# Get bills for specific user
 @users_app.get("/<int:user_id>/", endpoint="user_info")
 def get_user_bills_by_id(user_id: int):
     user = User.query.get(user_id)
@@ -37,6 +42,7 @@ def get_user_bills_by_id(user_id: int):
     return render_template("user_info.html", user=user, bills_list=bills_list)
 
 
+# Upload users and generate random bills
 @users_app.get("/reload/", endpoint="reload_users")
 def upload_users_info():
     with requests.session() as session:
@@ -75,4 +81,5 @@ def upload_users_info():
         except IntegrityError:
             db.session.rollback()
             raise BadRequest(f"Couldn't add new data to Database.")
-    return data
+    url = url_for("users_app.user_list")
+    return redirect(url)
