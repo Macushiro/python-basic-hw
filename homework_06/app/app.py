@@ -26,7 +26,6 @@ db.init_app(app)
 def db_create_all():
     db.drop_all()
     db.create_all()
-    # print(db.metadata.tables)
 
 
 @app.get("/", endpoint="index_page")
