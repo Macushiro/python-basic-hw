@@ -3,16 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
     <title>
         {% block title %}
-            Page title
+            Greetings, stranger:)
         {% endblock %}
     </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navigate menu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" aria-current="page" href="{{ url_for("index_page") }}">Home</a>
+                <a class="nav-link" href="{{ url_for("users_app.user_list") }}">User list</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="p-2 my-3">
     {% block body %}
-        Main information
+        <b class="shadow-sm p-3 mb-5 bg-info rounded text-dark"><em>Hello info</em></b>
     {% endblock %}
+</div>
 </body>
+<footer class="position-absolute bottom-0 start-0">
+    <div class="spinner-border spinner-border-sm text-secondary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    &copy;TKV 2023
+</footer>
 </html>

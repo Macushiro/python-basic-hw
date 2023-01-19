@@ -48,24 +48,31 @@ def upload_users_info():
         ]
         Bill.query.delete()
         User.query.delete()
-        db.session.commit()
-        db.session.add_all(users)
         try:
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            raise BadRequest(f"Couldn't add new users to Database.")
+            raise BadRequest(f"Couldn't delete previous data from Database.")
+        db.session.add_all(users)
+
+        # Generating random data for bills
         min_user_id = db.session.query(func.min(User.id)).scalar()
         max_user_id = db.session.query(func.max(User.id)).scalar()
         r = random
         user_list = range(min_user_id, max_user_id+1)
-        nums = range(1, r.randrange(1, 1000))
-        bills = [
-            Bill(user_id=el, bill_number=el, total=r.uniform(1.0, 1000.0), description=f"Check #{el} for {r.choice(['food', 'fuel', 'water'])}")
-            # for num in nums
-            for el in user_list
-        ]
-        print(min_user_id, max_user_id)
+        bills = []
+        left_bord = 1
+        for el in user_list:
+            right_bord = left_bord + r.randrange(1, 10)
+            while left_bord < right_bord:
+                bills.append(Bill(user_id=el, bill_number=left_bord, total=r.uniform(1.0, 1000.0),
+                                  description=f"Check #{left_bord} for {r.choice(['food', 'fuel', 'water'])}"))
+                left_bord += 1
+            left_bord = right_bord
         db.session.add_all(bills)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            raise BadRequest(f"Couldn't add new data to Database.")
     return data

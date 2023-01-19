@@ -1,17 +1,17 @@
 version: "3.9"
 
 services:
-#  app:
-#    build:
-#      dockerfile: ./Dockerfile
-#    environment:
-#      CONFIG: ProductionConfig
-#      SQLALCHEMY_DATABASE_URI: postgresql://dev_user:dev_pass123@pg:5432/bills
-#    ports:
-#      - "8000:80"
-#    depends_on:
-#      pg:
-#        condition: service_healthy
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    environment:
+      CONFIG: ProductionConfig
+      SQLALCHEMY_DATABASE_URI: postgresql://dev_user:dev_pass123@pg:5432/bills
+    ports:
+      - "8000:80"
+    depends_on:
+      pg:
+        condition: service_healthy
 
   pg:
     image: postgres

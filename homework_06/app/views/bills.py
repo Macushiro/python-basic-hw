@@ -37,7 +37,7 @@ def add_bill_for_user(user_id: int):
     )
 
     if request.method == "GET":
-        form = BillForm(user_name=user.first_name)
+        form = BillForm(user_name=user.name)
         return render_template("add.html", form=form, user=user)
 
     form = BillForm()
@@ -56,6 +56,6 @@ def add_bill_for_user(user_id: int):
         raise BadRequest(f"Could not add bill with #{bill_number!r},"
                          f" bill with that number already exists.")
 
-    flash(f"Successfully added new bill {bill_number} for user {user.first_name}!")
+    flash(f"Successfully added new bill {bill_number} for user {user.name}!")
     url = url_for("users_app.user_info", user_id=user_id)
     return redirect(url)

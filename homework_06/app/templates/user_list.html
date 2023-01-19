@@ -3,22 +3,22 @@
     User list
 {% endblock %}
 {% block body %}
-    <div class="h2 my-2">Users:</div>
+    <div class="h2">Users:</div>
     {% if user_list %}
         <ul class="list-group">
             {% for user in user_list %}
                 <li class="list-group-item">
-                    <span>User</span>
                     <a class="text-decoration-none"
                        href="{{ url_for('users_app.user_info', user_id=user.id) }}"
-                    >{{ user.name + " " + user.email }}</a>
+                    >{{ user.name }}</a>
+                    <span> with email: <em>{{ user.email }}</em></span>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
         <h2>No users yet</h2>
     {% endif %}
-    <a class="text-decoration-none"
-        href="{{ url_for('index_page') }}"
+    <a class="text-decoration-none my-3"
+       href="{{ url_for('index_page') }}"
     >Back to main page</a>
 {% endblock %}
