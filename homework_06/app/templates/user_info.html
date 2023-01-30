@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+    User {{ user.name }} bills
+{% endblock %}
+{% block body %}
+    <div class="h2 my-2">Bills for {{ user.name }}:</div>
+    {% if bills_list %}
+        <table class="table table-light table-striped-columns">
+            <thead class="table-warning">
+            <tr>
+                <th scope="col">Bill number</th>
+                <th scope="col">Total</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for bill in bills_list %}
+                <tr>
+                    <th scope="row">{{ bill.bill_number }}</th>
+                    <td>{{ bill.total }}</td>
+                    <td>{{ bill.description }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No bills yet</h2>
+    {% endif %}
+    <button type="button"
+            class="btn btn-outline-info my-3"
+            onclick="BackToList()"
+            id="Back_to_list">
+        Back to list
+    </button>
+    <button type="button"
+            class="btn btn-outline-warning my-3"
+            onclick="AddNewBill()"
+            id="Add_new_bill">
+        Add a new bill
+    </button>
+    <script>
+        function BackToList() {
+            window.location.href = "{{ url_for('users_app.user_list') }}"
+        }
+
+        function AddNewBill() {
+            window.location.href = "{{ url_for('bills_app.add_bill', user_id=user.id) }}"
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+    Main page
+{% endblock %}
+{% block body %}
+    <div class="h2">Main info</div>
+    <button type="button"
+            class="btn btn-outline-warning my-3"
+            onclick="GenerateNewBill()"
+            id="Generate_new_bills">
+        Generate bills
+    </button>
+    <script>
+        function GenerateNewBill() {
+            window.location.href = "{{ url_for('users_app.reload_users') }}"
+        }
+    </script>
+{% endblock %}

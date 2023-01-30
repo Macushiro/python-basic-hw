@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+    Add bill
+{% endblock %}
+{% block body %}
+    <div>
+        <div class="h3">Add a new bill for user {{ user.name }}</div>
+
+        <form method="post">
+            {{ form.hidden_tag() }}
+            {{ form.user_name.label(class="form-label") }}
+            {{ form.user_name(size=20, class="form-control") }}
+            {{ form.number.label(class="form-label") }}
+            {{ form.number(size=20, class="form-control") }}
+            {{ form.total.label(class="form-label") }}
+            {{ form.total(size=20, class="form-control") }}
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(size=20, class="form-control") }}
+
+            {% if form.user_name.errors %}
+                <ul class="errors">
+                    {% for error in form.user_name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <button class="btn btn-outline-primary my-2"
+                    type="submit">
+                Add
+            </button>
+        </form>
+    </div>
+{% endblock %}
