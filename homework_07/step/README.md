@@ -7,5 +7,5 @@
 ## Project info
 ```text
     Current version: 0.01
-    Date of birth: 2023.02.03
+    Date of birth: 2023.02.06
 ```
