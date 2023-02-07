@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from stafftrain import views
+from users.views import UserRegistrationView, UserLoginView, UserLogoutView
+
 urlpatterns = [
+    path('/', views.MainPage.as_view(), name='main_page'),
     path('admin/', admin.site.urls),
+    # users
+    path('users/create/', UserRegistrationView.as_view(), name='registration'),
+    path('users/login/', UserLoginView.as_view(), name='login'),
+    path('users/logout/', UserLogoutView.as_view(), name='logout'),
 ]
