@@ -20,7 +20,7 @@ from stafftrain import views
 from users.views import UserRegistrationView, UserLoginView, UserLogoutView
 
 urlpatterns = [
-    path('/', views.MainPage.as_view(), name='main_page'),
+    path('', views.MainPage.as_view(), name='main_page'),
     path('admin/', admin.site.urls),
     # users
     path('users/create/', UserRegistrationView.as_view(), name='registration'),
