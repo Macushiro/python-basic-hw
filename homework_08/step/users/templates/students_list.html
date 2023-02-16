@@ -3,15 +3,12 @@
     Students list
 {% endblock %}
 {% block body %}
-    <div class="h2">Students:</div>
     {% if students %}
+        <div class="h2">Students:</div>
         <ul class="list-group">
             {% for student in students %}
                 <li class="list-group-item">
-                    <a class="text-decoration-none"
-                       href="{% url 'main_page' %}"
-                    >{{ students.username }}</a>
-                    <span> with email: <em>{{ students.email }}</em></span>
+                    <strong>{{ student.username }}</strong> with email: <i>{{ student.email }}</i>
                 </li>
             {% endfor %}
         </ul>

@@ -7,11 +7,12 @@ from django import forms
 
 class RegistrationForm(UserCreationForm):
 
-    username = forms.CharField(help_text='Придумайте логин', label='Логин/Login')
-    password1 = forms.CharField(help_text='Придумайте пароль', label='Пароль/Password', widget=forms.PasswordInput())
-    password2 = forms.CharField(help_text='Введите повторно пароль', label='Пароль/Password', widget=forms.PasswordInput())
+    username = forms.CharField(help_text='Придумайте логин', label='Логин/Login:')
+    email = forms.CharField(help_text='Введите Вашу почту', label='Email:')
+    password1 = forms.CharField(help_text='Придумайте пароль', label='Пароль/Password:', widget=forms.PasswordInput())
+    password2 = forms.CharField(help_text='Введите повторно пароль', label='Пароль/Password:', widget=forms.PasswordInput())
 
     class Meta:
         model = User
         # model = Student   - for future functional extending
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')

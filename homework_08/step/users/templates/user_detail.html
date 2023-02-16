@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+    Personal info
+{% endblock %}
+{% block body %}
+    <div class="h3">Personal data</div>
+    <p>
+        <strong>Login as {{ object.username }}</strong>
+    </p>
+    <div>
+        <i>Email: {{ object.email }}</i>
+    </div>
+    <a class="text-decoration-none my-3"
+       href="{% url 'courses_list' %}"
+    >Back to courses list</a>
+{% endblock %}
