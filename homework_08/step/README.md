@@ -6,6 +6,6 @@
 ```
 ## Project info
 ```text
-    Current version: 0.01
+    Current version: 0.07
     Date of birth: 2023.02.06
 ```

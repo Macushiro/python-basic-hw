@@ -1,3 +1,7 @@
+"""
+    Файл регистрации моделей.
+"""
+
 from django.contrib import admin
 
 from stafftrain.models import Course, Result

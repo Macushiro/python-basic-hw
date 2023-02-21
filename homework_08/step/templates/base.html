@@ -1,3 +1,7 @@
+<!--"""-->
+<!--Базовый шаблон сайта.-->
+<!--"""-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +30,12 @@
             <div class="navbar-nav">
                 <a class="nav-link" aria-current="page" href="{% url 'main_page' %}">Home</a>
                 <a class="nav-link" aria-current="page" href="{% url 'courses_list' %}">Courses</a>
-                {% if user.is_superuser %}
+                {% if user.is_superuser or user.is_staff %}
                     <a class="nav-link" href="{% url 'students_list' %}">Students</a>
+{#                    <a class="nav-link" href="{% url 'results' %}">Results</a>#}
                 {% endif %}
                 {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'user_info' %}">User account</a>
                     <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                 {% else %}
                     <a class="nav-link" href="{% url 'login' %}">Log in</a>
@@ -45,7 +51,7 @@
     {% endblock %}
 </div>
 </body>
-<footer class="position-absolute bottom-0 start-0">
+<footer class="page-footer">
     <div class="spinner-border spinner-border-sm text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
