@@ -13,10 +13,12 @@
             - confirmation forms for deleting courses and students;
             - privileges control to get access to different URLs and options on site;
             - base data generation script;
+            - tests for models and views;
         Changed:
             - models and migrations;
             - all forms and templates to display necessary information about users and courses;
             - role model for feature access;
+            - views permissions;
         Deleted:
             - unused functionality;
     Date of birth: 2023.02.06
