@@ -1,0 +1,27 @@
+<!--"""-->
+<!--Шаблон/форма обновления данных пользователя.-->
+<!--"""-->
+
+{% extends 'base.html' %}
+
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>{{ field.label_tag }}</div>
+            <div>
+                {{ field }}
+            </div>
+            <hr>
+            {% if field.errors %}
+                {{ field.errors }}
+            {% endif %}
+        {% endfor %}
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+
+        <button class="btn btn-success" type="submit">Apply</button>
+    </form>
+{% endblock %}

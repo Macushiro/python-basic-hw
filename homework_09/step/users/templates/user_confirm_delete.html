@@ -1,0 +1,22 @@
+<!--"""-->
+<!--Шаблон/форма подтверждения удаления студента.-->
+<!--"""-->
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+    Do You rely want to delete:
+    <p>User <strong>{{ user.username }}</strong></p>
+    <span style = "text-decoration: underline">with email:</span>
+    <p>
+      {{ user.email}}
+    </p>
+     ?
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger" type="submit">Yes</button>
+    <a class="btn btn-outline-success" href="{% url 'students_list' %}">No</a>
+  </form>
+
+{% endblock %}
