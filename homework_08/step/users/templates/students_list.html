@@ -1,54 +1,21 @@
-<!--"""-->
-<!--Шаблон списка студентов.-->
-<!--"""-->
-
 {% extends "base.html" %}
 {% block title %}
     Students list
 {% endblock %}
 {% block body %}
-    {% if user.is_superuser or user.is_staff %}
-        {% if students %}
-            <table class="table table-light table-striped-columns">
-                <thead class="table-warning">
-                <tr>
-                    <th scope="col">Student ID</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Operations</th>
-                </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                {% for student in students %}
-                    <tr>
-                        <th scope="row">{{ student.pk }}</th>
-                        <td>{{ student.username }}</td>
-                        <td>{{ student.email }}</td>
-                        <td>{% if courses %}
-                            {% for cour in courses %}
-                                {% if cour.student.pk == student.pk %} /
-                                    {{ cour.name }}
-                                {% endif %}
-                            {% endfor %} /
-                        {% endif %}
-                        </td>
-                        <td>
-                        <span>
-                            <a class="btn btn-danger" href="{% url 'user_delete' pk=student.pk %}">Delete</a>
-                        </span>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <h2>No students yet</h2>
-        {% endif %}
+    {% if students %}
+        <div class="h2">Students:</div>
+        <ul class="list-group">
+            {% for student in students %}
+                <li class="list-group-item">
+                    <strong>{{ student.username }}</strong> with email: <i>{{ student.email }}</i>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-        <h2>It's page for staff only!</h2>
+        <h2>No students yet</h2>
     {% endif %}
-    <a class="btn btn-outline-primary my-3"
+    <a class="text-decoration-none my-3"
        href="{% url 'main_page' %}"
     >Back to main page</a>
 {% endblock %}

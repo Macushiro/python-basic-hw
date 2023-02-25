@@ -1,7 +1,3 @@
-<!--"""-->
-<!--Шаблон детальной информации по курсу.-->
-<!--"""-->
-
 {% extends "base.html" %}
 {% block title %}
     Personal info
@@ -26,7 +22,7 @@
             <h3>No students yet</h3>
         {% endif %}
     {% endif %}
-    <a class="btn btn-outline-primary my-3"
+    <a class="text-decoration-none my-3"
        href="{% url 'courses_list' %}"
     >Back to courses list</a>
 {% endblock %}

@@ -1,7 +1,3 @@
-<!--"""-->
-<!--Шаблон детальной профиля пользователя.-->
-<!--"""-->
-
 {% extends "base.html" %}
 {% block title %}
     Personal info
@@ -12,14 +8,9 @@
         <strong>Login as {{ object.username }}</strong>
     </p>
     <div>
-        <ul>
-            <li><strong>Почта/Email: </strong>{{ object.email }}</li>
-            <li><strong>Имя/Name: </strong>{{ object.first_name }}</li>
-            <li><strong>Фамилия/Last Name: </strong>{{ object.last_name }}</li>
-        </ul>
+        <i>Email: {{ object.email }}</i>
     </div>
-    <a class="btn btn-outline-warning" href="{% url 'user_update' pk=user.pk %}">Update info</a>
-    <a class="btn btn-outline-primary my-3"
+    <a class="text-decoration-none my-3"
        href="{% url 'courses_list' %}"
     >Back to courses list</a>
 {% endblock %}
