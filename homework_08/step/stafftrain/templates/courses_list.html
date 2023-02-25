@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+    Students list
+{% endblock %}
+{% block body %}
+    {% if courses %}
+    <div class="h3">Courses:</div>
+        <ul class="list-group">
+            {% for course in courses %}
+                <li class="list-group-item">
+                    <a class="text-decoration-none"
+                       href="{% url 'course_detail' pk=course.pk %}"
+                    >{{ course.name }}</a>
+                    <span> Is it available: <em>{{ course.is_available }}</em></span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>No courses yet</h3>
+    {% endif %}
+    {% if user.is_superuser %}
+    <button type="button"
+            class="btn btn-outline-warning my-3"
+            onclick="GenerateNewBill()"
+            id="Generate_new_bills">
+        Generate bills
+    </button>
+    <script>
+        function GenerateNewBill() {
+            {#window.location.href = "{{ url_for('users_app.reload_users') }}"  - for future functional extending#}
+        }
+    </script>
+    {% endif %}
+    <a class="text-decoration-none my-3"
+       href="{% url 'main_page' %}"
+    >Back to main page</a>
+{% endblock %}

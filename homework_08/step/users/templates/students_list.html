@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+    Students list
+{% endblock %}
+{% block body %}
+    {% if students %}
+        <div class="h2">Students:</div>
+        <ul class="list-group">
+            {% for student in students %}
+                <li class="list-group-item">
+                    <strong>{{ student.username }}</strong> with email: <i>{{ student.email }}</i>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2>No students yet</h2>
+    {% endif %}
+    <a class="text-decoration-none my-3"
+       href="{% url 'main_page' %}"
+    >Back to main page</a>
+{% endblock %}
