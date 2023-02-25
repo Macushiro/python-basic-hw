@@ -6,18 +6,6 @@
 ```
 ## Project info
 ```text
-    Current version: 0.05
-    Version info:
-        Added:
-            - all needed forms and views to use CRUD-operations with main models (User, Course);
-            - confirmation forms for deleting courses and students;
-            - privileges control to get access to different URLs and options on site;
-            - base data generation script;
-        Changed:
-            - models and migrations;
-            - all forms and templates to display necessary information about users and courses;
-            - role model for feature access;
-        Deleted:
-            - unused functionality;
+    Current version: 0.07
     Date of birth: 2023.02.06
 ```
