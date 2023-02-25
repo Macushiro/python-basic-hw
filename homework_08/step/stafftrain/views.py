@@ -2,7 +2,7 @@
     Файл классов-обработчиков запросов к приложению.
 """
 
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -31,7 +31,7 @@ class CourseListView(ListView):
         return Course.objects.all()
 
 
-class CourseDetailView(LoginRequiredMixin, DetailView):
+class CourseDetailView(DetailView):
     model = Course
     context_object_name = 'course'
     template_name = 'course_detail.html'

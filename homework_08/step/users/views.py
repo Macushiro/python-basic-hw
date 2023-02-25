@@ -2,7 +2,7 @@
     Файл классов-обработчиков запросов к приложению.
 """
 
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 # from .models import Student   - for future functional extending
@@ -41,17 +41,14 @@ class UserLoginView(LoginView):
     template_name = 'login_form.html'
 
 
-class UserLogoutView(LoginRequiredMixin, LogoutView):
+class UserLogoutView(LogoutView):
     pass
 
 
-class StudentsListView(UserPassesTestMixin, ListView):
+class StudentsListView(ListView):
     model = User
     context_object_name = 'students'
     template_name = 'students_list.html'
-
-    def test_func(self):
-        return self.request.user.is_staff or self.request.user.is_superuser
 
     def get_queryset(self):
         return User.objects.filter(is_staff=False)
@@ -62,7 +59,7 @@ class StudentsListView(UserPassesTestMixin, ListView):
         return context
 
 
-class UserDetailView(LoginRequiredMixin, TemplateView):
+class UserDetailView(TemplateView):
     template_name = 'user_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -71,7 +68,7 @@ class UserDetailView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+class UserUpdateView(UpdateView):
     model = User
     template_name = 'user_update_form.html'
     form_class = UserUpdateForm
