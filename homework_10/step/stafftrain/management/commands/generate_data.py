@@ -2,6 +2,7 @@
     Файл наполнения БД.
 """
 
+import os
 import random
 
 import requests
@@ -10,7 +11,6 @@ from django.core.exceptions import BadRequest
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 
-import env
 from stafftrain.models import Course, Result
 
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
@@ -60,7 +60,7 @@ class Command(BaseCommand):
         super_user = User.objects.create_superuser(
             username="macushiro",
             email="macushiro@newbie.com",
-            password=env.su_password,
+            password=os.environ.get("super_user"),
         )
 
         # 2.1 Getting data from external service
