@@ -28,9 +28,6 @@ jobs:
     - name: Run Tests
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-    - if: ${{ env.SECRET_KEY != '' }}
       run: |
         cd homework_10/step/
         python manage.py test
-    - if: ${{ env.SECRET_KEY == '' }}
-      run: echo 'This step will only run if the secret does not have a value set.'
