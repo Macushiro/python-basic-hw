@@ -2,37 +2,64 @@
     Файл наполнения БД.
 """
 
+import random
+
+import requests
+from django.contrib.auth.models import User
 from django.core.exceptions import BadRequest
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
 from django.db import IntegrityError
-import random
-import requests
 
-from stafftrain.models import Course, Result
 import env
+from stafftrain.models import Course, Result
 
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
-course_list = ['SQL', 'Python', 'Java', 'Kotlin', 'JS', 'HTML/CSS', 'JQuery', 'C++']
-course_level = ['starter', 'base', 'advanced', 'professional', 'for architects', 'optimization']
+course_list = [
+    "SQL",
+    "Python",
+    "Java",
+    "Kotlin",
+    "JS",
+    "HTML/CSS",
+    "JQuery",
+    "C++",
+]
+course_level = [
+    "starter",
+    "base",
+    "advanced",
+    "professional",
+    "for architects",
+    "optimization",
+]
+
 
 class Command(BaseCommand):
-    help = 'Generate data'
+    """
+    Custom command for data generation
+    """
+    help = "Generate data"
 
     def handle(self, *args, **options):
-        print('DB populating has started')
+        """
+        command function
+        :param args: 
+        :param options: 
+        :return: 
+        """
+        print("DB populating has started")
 
         # 1. Clearing
-        print('Erasing previous data')
+        print("Erasing previous data")
         Result.objects.all().delete()
         Course.objects.all().delete()
         User.objects.all().delete()
 
         # 2. Generate base data
-        print('Generating base data')
-        su = User.objects.create_superuser(
-            username='macushiro',
-            email='macushiro@newbie.com',
+        print("Generating base data")
+        super_user = User.objects.create_superuser(
+            username="macushiro",
+            email="macushiro@newbie.com",
             password=env.su_password,
         )
 
@@ -40,21 +67,22 @@ class Command(BaseCommand):
         with requests.session() as session:
             response = session.get(USERS_DATA_URL)
             data = response.json()
-            r = random
-            for el in data:
+            rand = random
+            for elem in data:
                 try:
                     user = User.objects.create(
-                        username=el['username'],
-                        first_name=el['name'],
-                        email=el['email']
+                        username=elem["username"],
+                        first_name=elem["name"],
+                        email=elem["email"],
                     )
                     # 2.2 Generate courses data
                     print(user.id, user.username, user.first_name)
-                    course_name = r.choice(course_list)
+                    course_name = rand.choice(course_list)
                     course = Course.objects.create(
                         name=course_name,
-                        description=f"{course_name} {r.choice(course_level)} course",
-                        is_available=True, student=user
+                        description=f"{course_name} {rand.choice(course_level)} course",
+                        is_available=True,
+                        student=user,
                     )
                     print(course.name, course.description)
                 except IntegrityError:
@@ -65,15 +93,14 @@ class Command(BaseCommand):
         # max_user_id = User.objects.order_by('id').last()
         # user_list = range(min_user_id, max_user_id + 1)
         # left_bord = 1
-        # for el in user_list:
-        #     right_bord = left_bord + r.randrange(1, 10)
+        # for elem in user_list:
+        #     right_bord = left_bord + rand.randrange(1, 10)
         #     while left_bord < right_bord:
         #         result = Result.objects.create(
-        #             student=el,
-        #             course=f"Result #{left_bord} for {r.choice(['normal', 'good', 'great'])}",
-        #             percent=r.uniform(1.0, 100.0),
+        #             student=elem,
+        #             course=f"Result #{left_bord} for {rand.choice(['normal', 'good', 'great'])}",
+        #             percent=rand.uniform(1.0, 100.0),
         #             test_result=left_bord,
         #         )
         #         left_bord += 1
         #     left_bord = right_bord
-

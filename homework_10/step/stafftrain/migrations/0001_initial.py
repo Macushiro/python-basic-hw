@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,23 +14,85 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Наименование курса/Course name')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='О курсе/Description')),
-                ('is_available', models.BooleanField(blank=True, null=True, verbose_name='Доступен/Available')),
-                ('student', models.OneToOneField(null=True, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=256, verbose_name="Наименование курса/Course name"
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="О курсе/Description"
+                    ),
+                ),
+                (
+                    "is_available",
+                    models.BooleanField(
+                        blank=True, null=True, verbose_name="Доступен/Available"
+                    ),
+                ),
+                (
+                    "student",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Result',
+            name="Result",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('percent', models.DecimalField(decimal_places=1, max_digits=100, verbose_name='Процент прохождения/Completion percent')),
-                ('test_result', models.BooleanField(default=False, verbose_name='Статус теста/Test status')),
-                ('course', models.OneToOneField(on_delete=django.db.models.deletion.PROTECT, to='stafftrain.course')),
-                ('student', models.OneToOneField(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "percent",
+                    models.DecimalField(
+                        decimal_places=1,
+                        max_digits=100,
+                        verbose_name="Процент прохождения/Completion percent",
+                    ),
+                ),
+                (
+                    "test_result",
+                    models.BooleanField(
+                        default=False, verbose_name="Статус теста/Test status"
+                    ),
+                ),
+                (
+                    "course",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="stafftrain.course",
+                    ),
+                ),
+                (
+                    "student",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

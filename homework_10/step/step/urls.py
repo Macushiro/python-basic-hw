@@ -37,24 +37,24 @@ from users.views import (
 
 urlpatterns = [
     # base URLs
-    path('', MainPageView.as_view(), name='main_page'),
-    path('admin/', admin.site.urls),
-    path('generate_data/', generate_data, name='generate'),
+    path("", MainPageView.as_view(), name="main_page"),
+    path("admin/", admin.site.urls),
+    path("generate_data/", generate_data, name="generate"),
     # users
-    path('users/create/', UserRegistrationView.as_view(), name='registration'),
-    path('users/login/', UserLoginView.as_view(), name='login'),
-    path('users/logout/', UserLogoutView.as_view(), name='logout'),
-    path('users/info/', UserDetailView.as_view(), name='user_info'),
-    path('users/update/<int:pk>/', UserUpdateView.as_view(), name='user_update'),
-    path('users/delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
+    path("users/create/", UserRegistrationView.as_view(), name="registration"),
+    path("users/login/", UserLoginView.as_view(), name="login"),
+    path("users/logout/", UserLogoutView.as_view(), name="logout"),
+    path("users/info/", UserDetailView.as_view(), name="user_info"),
+    path("users/update/<int:pk>/", UserUpdateView.as_view(), name="user_update"),
+    path("users/delete/<int:pk>/", UserDeleteView.as_view(), name="user_delete"),
     # students
-    path('students/list/', StudentsListView.as_view(), name='students_list'),
+    path("students/list/", StudentsListView.as_view(), name="students_list"),
     # courses
-    path('courses/list/', CourseListView.as_view(), name='courses_list'),
-    path('courses/detail/<int:pk>/', CourseDetailView.as_view(), name='course_detail'),
-    path('courses/create/', CourseCreateView.as_view(), name='course_create'),
-    path('courses/update/<int:pk>/', CourseUpdateView.as_view(), name='course_update'),
-    path('courses/delete/<int:pk>/', CourseDeleteView.as_view(), name='course_delete'),
+    path("courses/list/", CourseListView.as_view(), name="courses_list"),
+    path("courses/detail/<int:pk>/", CourseDetailView.as_view(), name="course_detail"),
+    path("courses/create/", CourseCreateView.as_view(), name="course_create"),
+    path("courses/update/<int:pk>/", CourseUpdateView.as_view(), name="course_update"),
+    path("courses/delete/<int:pk>/", CourseDeleteView.as_view(), name="course_delete"),
     # results
     # path('results/list/', ResultListView.as_view(), name='results'),
 ]

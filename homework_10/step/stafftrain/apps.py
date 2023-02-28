@@ -1,6 +1,13 @@
+"""
+    Файл конфигурации приложения.
+"""
+
 from django.apps import AppConfig
 
 
 class StafftrainConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'stafftrain'
+    """
+    StafftrainConfig
+    """
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "stafftrain"
