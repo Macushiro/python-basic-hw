@@ -26,6 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r homework_10/step/requirements.txt
     - name: Run Tests
+      env:
+      SECRET_KEY: ${{ vars.SECRET_KEY }}
       run: |
-        cd homework_10/step/
-        python manage.py test
+        homework_10/step/python manage.py test
