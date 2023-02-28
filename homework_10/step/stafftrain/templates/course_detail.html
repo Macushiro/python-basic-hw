@@ -1,0 +1,32 @@
+<!--"""-->
+<!--Шаблон детальной информации по курсу.-->
+<!--"""-->
+
+{% extends "base.html" %}
+{% block title %}
+    Personal info
+{% endblock %}
+{% block body %}
+    <div class="h3">Course detail info</div>
+    <span>Course name: {{ course.name }}</span>
+    <div>
+        Course description: {{ course.description }}
+    </div>
+    {% if user.is_authenticated %}
+        {% if users %}
+            <div class="h3">Students:</div>
+            <ul class="list-group">
+                {% for user in users %}
+                    <li class="list-group-item">
+                        <strong>{{ user.username }}</strong> with email: <i>{{ user.email }}</i>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>No students yet</h3>
+        {% endif %}
+    {% endif %}
+    <a class="btn btn-outline-primary my-3"
+       href="{% url 'courses_list' %}"
+    >Back to courses list</a>
+{% endblock %}
