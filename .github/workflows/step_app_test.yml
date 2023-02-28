@@ -29,4 +29,5 @@ jobs:
       env:
       SECRET_KEY: ${{ vars.SECRET_KEY }}
       run: |
-        homework_10/step/python manage.py test
+        cd homework_10/step/
+        python manage.py test
