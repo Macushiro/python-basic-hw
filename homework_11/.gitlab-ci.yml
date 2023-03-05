@@ -54,6 +54,5 @@ make_build:
 deploy:
   stage: deploy
   script:
-    - echo "Deploying has completed"
-  environment: production
+    - echo "Deploying has completed"S
 
